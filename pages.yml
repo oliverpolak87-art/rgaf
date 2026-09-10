@@ -1,0 +1,101 @@
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+  categories: [image]
+
+content:
+  - name: site
+    label: Nastavení webu
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: name
+        label: Jméno
+        type: string
+        required: true
+      - name: role
+        label: Popisek pod jménem
+        type: string
+      - name: heroTitle
+        label: Hlavní nadpis
+        type: string
+        required: true
+      - name: heroText
+        label: Text na úvodu
+        type: text
+      - name: heroImage
+        label: Hlavní fotografie
+        type: image
+      - name: aboutTitle
+        label: Nadpis O mně
+        type: string
+      - name: aboutText
+        label: Text O mně
+        type: text
+      - name: email
+        label: E-mail
+        type: string
+      - name: instagram
+        label: Instagram odkaz
+        type: string
+      - name: footer
+        label: Text v patičce
+        type: string
+
+  - name: projects
+    label: Galerie / projekty
+    type: collection
+    path: content/projects
+    format: json
+    filename:
+      template: "{slug}.json"
+      field: create
+    view:
+      primary: title
+      fields: [title, year, category, featured]
+      sort: [year, title]
+      search: [title, category, year]
+      default:
+        sort: year
+        order: desc
+    fields:
+      - name: title
+        label: Název galerie
+        type: string
+        required: true
+      - name: slug
+        label: Adresa galerie
+        type: string
+        required: true
+        description: Jen malá písmena, čísla a pomlčky. Např. gt-cup-brno-2026
+        pattern:
+          regex: "^[a-z0-9-]+$"
+          message: "Použij jen malá písmena, čísla a pomlčky."
+      - name: year
+        label: Rok
+        type: string
+      - name: category
+        label: Kategorie
+        type: select
+        options:
+          values: [Circuit, Rally, Track, Drift, Karting, Event, Portrait, Other]
+      - name: description
+        label: Krátký popis
+        type: text
+      - name: cover
+        label: Náhledová fotografie
+        type: image
+        required: true
+      - name: featured
+        label: Velká galerie na homepage
+        type: boolean
+      - name: gallery
+        label: Fotky v galerii
+        type: image
+        options:
+          multiple: true
+          unique: true
+          extensions: [jpg, jpeg, png, webp, avif]
+          rename: safe
