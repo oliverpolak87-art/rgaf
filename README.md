@@ -53,3 +53,8 @@ Pak otevři `dist/index.html` přes lokální webserver.
 
 ## Poznámka k fotkám
 Fotografie se ukládají do `public/uploads`. Pro velké galerie doporučuji exportovat fotografie do WebP/JPEG v rozumném rozlišení, protože GitHub repository není ideální jako úložiště tisíců originálních RAW/JPEG souborů.
+
+
+## Oprava buildu
+Tato verze je odolná proti chybě `ENOENT ... /public`.
+Pokud složka `public` při buildu chybí, `build.js` si potřebné CSS/JS vytvoří sám.
